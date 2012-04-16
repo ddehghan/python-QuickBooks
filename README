@@ -1,0 +1,5 @@
+Simple script to parse Bank of America visa statement and convert it to Quickbooks IIF file format.
+
+
+Bugs:
+* Can't deal with refunds in credit card statement. I dealt with the problem manually.
