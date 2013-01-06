@@ -11,9 +11,9 @@ def error(trans):
     traceback.print_exc(None, sys.stderr)
 
 
-def main():
-    input_file = open(os.path.join(PROJECT_ROOT, 'input.csv'), 'r')
-    output_file = open(os.path.join(PROJECT_ROOT, 'output.iif'), 'w')
+def main(input_file_name):
+    input_file = open(os.path.join(PROJECT_ROOT, input_file_name), 'r')
+    output_file = open(os.path.join(PROJECT_ROOT, input_file_name + '.iif'), 'w')
 
 
     # This is the name of the QuickBooks checking account
@@ -34,7 +34,10 @@ def main():
 
     # And here's the part that inserts data into the tempalate
     for trans in input_file:
-
+        trans = trans.strip()
+        if trans == "":
+            continue
+            
         try:
             list = trans.split(',')
             assert (len(list) == 3 )
@@ -64,4 +67,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+
+    if len(sys.argv) != 2:
+        print "usage:   python convert.py input.csv"
+
+    main(sys.argv[1])
